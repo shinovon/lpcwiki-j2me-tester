@@ -308,6 +308,10 @@ public class L extends MIDlet implements CommandListener {
 			appendOem("Siemens API");
 		}
 		
+		if (jsr) {
+			sb.append("}}");
+			jsr = false;
+		}
 		form.append(sb.toString());
 		display.setCurrent(form);
 	}
