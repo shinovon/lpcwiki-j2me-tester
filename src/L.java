@@ -307,22 +307,6 @@ public class L extends MIDlet implements CommandListener {
 		display.setCurrent(form);
 	}
 	
-	private static long testMem() {
-		long m = 0;
-		try {
-			Vector v = new Vector();
-			while (true) {
-				v.addElement(new byte[102400]);
-				m = Runtime.getRuntime().totalMemory();
-			}
-		} catch (Throwable e) {
-			m = Runtime.getRuntime().totalMemory();
-		} finally {
-			System.gc();
-		}
-		return m;
-	}
-	
 	private void appendJsr(String s) {
 		if (!jsr) {
 			sb.append("{{JSR|");
@@ -348,6 +332,29 @@ public class L extends MIDlet implements CommandListener {
 		}
 		sb.append("<br>").append(s).append("\n");
 	}
+
+	public void commandAction(Command c, Displayable d) {
+		if (c.getCommandType() == Command.EXIT) {
+			notifyDestroyed();
+			return;
+		}
+	}
+	
+	private static long testMem() {
+		long m = 0;
+		try {
+			Vector v = new Vector();
+			while (true) {
+				v.addElement(new byte[102400]);
+				m = Runtime.getRuntime().totalMemory();
+			}
+		} catch (Throwable e) {
+			m = Runtime.getRuntime().totalMemory();
+		} finally {
+			System.gc();
+		}
+		return m;
+	}
 	
 	static boolean checkClass(String s) {
 		try {
@@ -361,13 +368,6 @@ public class L extends MIDlet implements CommandListener {
 			return true;
 		} catch (Throwable e) {
 			return false;
-		}
-	}
-
-	public void commandAction(Command c, Displayable d) {
-		if (c.getCommandType() == Command.EXIT) {
-			notifyDestroyed();
-			return;
 		}
 	}
 	
