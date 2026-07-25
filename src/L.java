@@ -10,12 +10,11 @@ import javax.microedition.midlet.MIDlet;
 public class L extends MIDlet implements CommandListener {
 
 	private boolean started;
-	private Form form;
 	private long startHeap;
 	
 	// state
-	private static StringBuffer sb;
-	private static boolean jsr;
+	private StringBuffer sb;
+	private boolean jsr;
 
 	protected void destroyApp(boolean unconditional) {}
 
@@ -35,12 +34,12 @@ public class L extends MIDlet implements CommandListener {
 		
 		long m = testMem();
 		
-		form = new Form("j2me-tester2 v" + getAppProperty("MIDlet-Version"));
+		Form form = new Form("j2me-tester2 v" + getAppProperty("MIDlet-Version"));
 		form.addCommand(new Command("Exit", Command.EXIT, 0));
 //		form.addCommand(new Command("Change view", Command.SCREEN, 1));
 		form.setCommandListener(this);
 		
-		StringBuffer sb = L.sb = new StringBuffer();
+		StringBuffer sb = this.sb = new StringBuffer();
 		String s = System.getProperty("microedition.platform");
 		
 		sb.append("microedition.platform: ").append(s);
@@ -324,7 +323,7 @@ public class L extends MIDlet implements CommandListener {
 		return m;
 	}
 	
-	private static void appendJsr(String s) {
+	private void appendJsr(String s) {
 		if (!jsr) {
 			sb.append("{{JSR|");
 		} else {
@@ -334,7 +333,7 @@ public class L extends MIDlet implements CommandListener {
 		jsr = true;
 	}
 	
-	private static void appendRemark(String s) {
+	private void appendRemark(String s) {
 		if (jsr) {
 			sb.append("}}");
 			jsr = false;
@@ -342,7 +341,7 @@ public class L extends MIDlet implements CommandListener {
 		sb.append(" {{remark|").append(s).append("}}<br>\n");
 	}
 	
-	private static void appendOem(String s) {
+	private void appendOem(String s) {
 		if (jsr) {
 			sb.append("}}\n");
 			jsr = false;
