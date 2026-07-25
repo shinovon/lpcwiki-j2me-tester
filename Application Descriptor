@@ -1,0 +1,7 @@
+MIDlet-Vendor: nnproject
+MIDlet-Version: 1.0.0
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Name: lpcwiki j2me tester
+MIDlet-1: lpcwiki j2me tester,,L
+MicroEdition-Profile: MIDP-1.0
+MIDlet-Jar-URL: lpctest.jar
