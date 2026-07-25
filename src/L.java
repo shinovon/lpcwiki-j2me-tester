@@ -78,14 +78,19 @@ public class L extends MIDlet implements CommandListener {
 		} else {
 			sb.append("1.0");
 		}
-		sb.append(", CLDC ");
-//		if (checkClass("java.security.Permission")) {
-//			sb.append("1.1.1");
-//		} else
-		if (checkClass("java.lang.Float")) {
-			sb.append("1.1");
+		sb.append(", ");
+		if (checkClass("java.lang.Enum") || checkClass("java.util.regex.Pattern")) {
+			sb.append("JDK");
+		} else if (checkClass("java.lang.CharSequence")) {
+			sb.append("CDC 1.1");
+		} else if (checkClass("java.lang.SecurityManager")) {
+			sb.append("CDC 1.0");
+		} else if (checkClass("java.security.Permission")) {
+			sb.append("CLDC 1.1.1");
+		} else if (checkClass("java.lang.Float")) {
+			sb.append("CLDC 1.1");
 		} else {
-			sb.append("1.1.1");
+			sb.append("CLDC 1.0");
 		}
 		
 		sb.append('\n').append(m != startHeap ? "'''Max heap size''': ": "'''Heap size''': ");
