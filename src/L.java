@@ -293,7 +293,7 @@ public class L extends MIDlet implements CommandListener {
 		}
 		
 		if (checkClass("com.sprintpcs.media.Player")) {
-			appendOem("Sprint Media PI");
+			appendOem("Sprint Media API");
 		}
 		
 		if (checkClass("com.vodafone.v10.system.device.DeviceControl")) {
