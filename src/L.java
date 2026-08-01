@@ -56,9 +56,9 @@ public class L extends MIDlet implements CommandListener {
 					sb.append("Java Runtime ").append(v).append(" for Symbian");
 				} else {
 					sb.append("Java Runtime ").append(v).append(" for S60");
-					if ((s = System.getProperty("com.sonyericsson.java.platform")) != null) {
-						sb.append(", ").append(s).append("\n");
-					}
+				}
+				if ((s = System.getProperty("com.sonyericsson.java.platform")) != null) {
+					sb.append(", ").append(s).append("\n");
 				}
 				sb.append("\n");
 			}
@@ -180,7 +180,7 @@ public class L extends MIDlet implements CommandListener {
 			appendJsr("184");
 		}
 		
-		if (System.getProperty("microedition.jtwi.version") != null) {
+		if (System.getProperty("microedition.jtwi.version") != null && System.getProperty("microedition.msa.version") == null) {
 			appendJsr("185");
 		}
 		
