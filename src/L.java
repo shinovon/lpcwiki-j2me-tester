@@ -184,6 +184,10 @@ public class L extends MIDlet implements CommandListener {
 			appendJsr("185");
 		}
 		
+		if (checkClass("javax.wireless.messaging.MessagePart")) {
+			appendJsr("205");
+		}
+		
 		if (checkClass("javax.microedition.content.ContentHandler")) {
 			appendJsr("211");
 		}
