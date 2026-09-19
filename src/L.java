@@ -65,6 +65,7 @@ public class L extends MIDlet implements CommandListener {
 		} else if ((s = System.getProperty("com.sonyericsson.java.platform")) != null) {
 			sb.append("Sony Ericsson Java Platform ").append(s).append("\n");
 		}
+		// TODO detect Java Runtime for S40, Asha
 		
 		sb.append("MIDP ");
 		if (checkClass("javax.microedition.lcdui.TabbedPane")) {
@@ -254,7 +255,12 @@ public class L extends MIDlet implements CommandListener {
 		} else if (checkClass("com.nokia.mid.ui.VirtualKeyboard")) {
 			appendOem("Nokia UI API 1.6");
 		} else if (checkClass("com.nokia.mid.ui.SoftNotification")) {
-			appendOem("Nokia UI API 1.4");
+			if (System.getProperty("com.nokia.mid.ui.customfontsize") == null) {
+				// early s60v3.2
+				appendOem("Nokia UI API 1.1");
+			} else {
+				appendOem("Nokia UI API 1.4");
+			}
 		} else if (System.getProperty("com.nokia.mid.ui.customfontsize") != null) {
 			appendOem("Nokia UI API 1.1c");
 		} else if (checkClass("com.nokia.mid.ui.Clipboard")) {
