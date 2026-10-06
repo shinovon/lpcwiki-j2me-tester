@@ -71,6 +71,8 @@ public class L extends MIDlet implements CommandListener {
 			}
 		} else if ((s = System.getProperty("com.sonyericsson.java.platform")) != null) {
 			sb.append("Sony Ericsson Java Platform ").append(s).append("\n");
+		} else if (System.getProperty("java.version") == null && System.getProperty("com.sonyericsson.imei") != null) {
+			sb.append("Sony Ericsson Java Platform or compatible\n");
 		}
 		// TODO detect Java Runtime for S40, Asha
 		
