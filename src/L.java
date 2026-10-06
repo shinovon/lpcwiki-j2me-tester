@@ -35,11 +35,11 @@ public class L extends MIDlet implements CommandListener {
 		String s = System.getProperty("microedition.platform");
 		
 		long m;
-		if (System.getProperty("com.oracle.jwc.version") != null || (s != null && s.startsWith("Blackberry"))) {
+		if (System.getProperty("com.oracle.jwc.version") != null || (s != null && s.toLowerCase().startsWith("blackberry"))) {
 			// do not test heap on asha and blackberry as it crashes the app there
 			m = -1;
 		} else {
-			m = -1;
+			m = testMem();
 		}
 		
 		Form form = new Form("j2me-tester2 v" + getAppProperty("MIDlet-Version"));
