@@ -32,7 +32,15 @@ public class L extends MIDlet implements CommandListener {
 		Display display = Display.getDisplay(this);
 		display.setCurrent(new Form("Loading"));
 		
-		long m = testMem();
+		String s = System.getProperty("microedition.platform");
+		
+		long m;
+		if (System.getProperty("com.oracle.jwc.version") != null || (s != null && s.startsWith("Blackberry"))) {
+			// do not test heap on asha and blackberry as it crashes the app there
+			m = -1;
+		} else {
+			m = -1;
+		}
 		
 		Form form = new Form("j2me-tester2 v" + getAppProperty("MIDlet-Version"));
 		form.addCommand(new Command("Exit", Command.EXIT, 0));
@@ -40,7 +48,6 @@ public class L extends MIDlet implements CommandListener {
 		form.setCommandListener(this);
 		
 		StringBuffer sb = this.sb = new StringBuffer();
-		String s = System.getProperty("microedition.platform");
 		
 		sb.append("microedition.platform: ").append(s);
 		
@@ -94,13 +101,15 @@ public class L extends MIDlet implements CommandListener {
 			sb.append("CLDC 1.0");
 		}
 		
-		sb.append('\n').append(m != startHeap ? "'''Max heap size''': ": "'''Heap size''': ");
-		if (m >= 1024 * 1024 && m % (1024 * 1024) == 0) {
-			sb.append(m / 1024 / 1024).append(" MB");
-		} else if (m >= 512 * 1024) {
-			sb.append(m / 1024).append(" KB");
-		} else {
-			sb.append(m).append(" bytes");
+		if (m != -1) {
+			sb.append('\n').append(m != startHeap ? "'''Max heap size''': ": "'''Heap size''': ");
+			if (m >= 1024 * 1024 && m % (1024 * 1024) == 0) {
+				sb.append(m / 1024 / 1024).append(" MB");
+			} else if (m >= 512 * 1024) {
+				sb.append(m / 1024).append(" KB");
+			} else {
+				sb.append(m).append(" bytes");
+			}
 		}
 		
 		sb.append("\n\nJava APIs:\n");
